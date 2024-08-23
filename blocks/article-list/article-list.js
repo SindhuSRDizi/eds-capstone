@@ -12,7 +12,6 @@ async function createRowDiv(container, row) {
   const imageLink = document.createElement('a');
   imageLink.href = row.url;
   imageLink.title = row.title;
-//   imageLink.classList.add('button');
 
   // Create the optimized picture element
   const optimizedPicture = createOptimizedPicture(row.image, row.title, false, [{ width: '750' }]);

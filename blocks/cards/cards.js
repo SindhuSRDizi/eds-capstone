@@ -14,7 +14,6 @@ export default function decorate(block) {
   });
   ul.querySelectorAll('picture > img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
   ul.querySelectorAll('.cards-card-body .button-container a').forEach((a, index) => {
-    const pictureContainer = ul.querySelector('cards-card-image');
     const picture = ul.querySelectorAll('picture')[index];
     if (picture) {
       const link = a.cloneNode(true);
@@ -25,7 +24,7 @@ export default function decorate(block) {
   ul.querySelectorAll('.cards-card-body').forEach(container => {
     const paragraphs = container.querySelectorAll('p');
     if (paragraphs.length >= 2) {
-        paragraphs[1].classList.add('card-paragraph');  // Adds 'new-class' to the second <p>
+        paragraphs[1].classList.add('card-paragraph'); // Adds 'new-class' to the second <p>
     }
   });
   block.textContent = '';
