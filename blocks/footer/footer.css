@@ -15,6 +15,13 @@ footer .footer p {
   font-size: var(--body-font-size-s);
 }
 
+footer .footer p a {
+  font-size: var(--body-font-size-s);
+  color: var(--light-color, #ebebeb);
+  font-family: var(--body-font-family);
+  text-decoration: underline;
+}
+
 footer .footer .footer-logo-img {
   width: 128px;
   height: auto;
