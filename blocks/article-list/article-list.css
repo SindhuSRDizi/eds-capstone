@@ -15,44 +15,44 @@
     grid-gap: 7px;
 }
 /* Image inside the card */
-.article-list .articlelist-block .cards-card-image {
+.article-list .articlelist-block .article-card-image {
     overflow: hidden;
 }
-.article-list .articlelist-block .cards-card-image a.button:any-link {
+.article-list .articlelist-block .article-card-image a.button:any-link {
     background: none;
     margin: 0;
     padding: 0;
     border-radius: 0;
 }
-.article-list .articlelist-block .cards-card-image img {
+
+.article-list .articlelist-block .article-card-image img {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-
 /* Card body (text content) */
-.article-list .articlelist-block .cards-card-body {
-    margin: 16px;
+.article-list .articlelist-block .article-card-body {
+    margin: 16px 16px 16px 0;
 }
 
-.article-list .articlelist-block .cards-card-body h3 {
+.article-list .articlelist-block .article-card-body h3 {
     font-size: 1.5em;
     margin: 10px 0;
     font-weight: 600;
 }
 
-.article-list .articlelist-block .cards-card-body p {
+.article-list .articlelist-block .article-card-body p {
     font-size: 1em;
     color: #666;
     line-height: 1.5;
 }
-.article-list .articlelist-block .cards-card-body p.card-paragraph{
+.article-list .articlelist-block .article-card-body p.article-paragraph{
     color: dimgray;
     display: block;
     font-size: var(--fontSizeSmall, 14px);
-    margin-top: 1rem;
+    margin-top: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
@@ -61,13 +61,17 @@
   }
 
 /* Links */
-.article-list .articlelist-block .cards-card-body a {
-    color: #007bff;
+.article-list .articlelist-block .article-card-body a {
+    color: var(--textColor,#202020);
     text-decoration: none;
     transition: color 0.3s ease;
+    text-transform: uppercase;
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
 }
 
-.article-list .articlelist-block .cards-card-body a:hover {
-    color: #0056b3;
+.article-list .articlelist-block .article-card-body a:hover {
+    color: var(--textColor,#202020);
     text-decoration: underline;
 }

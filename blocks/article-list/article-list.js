@@ -6,7 +6,7 @@ async function createRowDiv(container, row) {
 
   // Create the image container div
   const imageDiv = document.createElement('div');
-  imageDiv.classList.add('cards-card-image');
+  imageDiv.classList.add('article-card-image');
 
   // Create the link that wraps the image
   const imageLink = document.createElement('a');
@@ -22,7 +22,7 @@ async function createRowDiv(container, row) {
 
   // Create the body container div
   const bodyDiv = document.createElement('div');
-  bodyDiv.classList.add('cards-card-body');
+  bodyDiv.classList.add('article-card-body');
 
   // Create the link for the title
   const titleLink = document.createElement('a');
@@ -33,7 +33,7 @@ async function createRowDiv(container, row) {
 
   // Create the paragraph for the description
   const description = document.createElement('p');
-  description.classList.add('card-paragraph');
+  description.classList.add('article-paragraph');
   description.textContent = row.description;
 
   bodyDiv.appendChild(titleLink);

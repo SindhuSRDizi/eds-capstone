@@ -8,19 +8,18 @@
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
   background-color: var(--background-color);
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: 16px 16px 16px 0;
 }
 
 .cards .cards-card-body .card-paragraph{
   color: dimgray;
   display: block;
   font-size: var(--fontSizeSmall, 14px);
-  margin-top: 1rem;
+  margin-top: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   text-transform: uppercase;
@@ -40,6 +39,18 @@
 
 .cards .cards-card-image a.button:any-link {
   background: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.cards .cards-card-body a {
+  color: var(--textColor,#202020);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  padding: 0px;
+  margin: 0px;
+  background-color: transparent;
 }
 
 .cards > ul > li .cards-card-image picture {

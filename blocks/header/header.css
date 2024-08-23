@@ -253,6 +253,7 @@ header .nav-top .button-container a.button:any-link{
   padding: 0 20px;
   line-height: 1;
   font-size: var(--nav-font-size-s);
+  color: var(--light-color);
 }
 
 @media (width >= 900px) {

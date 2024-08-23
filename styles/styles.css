@@ -21,6 +21,7 @@
   --overlay-background-color: #eeeeee;
   --highlight-background-color: #cccccc;
   --background-color-black: #000000;
+  --brandPrimary-color: #ffea00;
 
   /* fonts */
   --heading-font-family: Asar, Georgia, "Times New Roman", Times, serif;
@@ -62,6 +63,7 @@
   src: local('Arial');
 }
 
+
 @media (width >=900px) {
   :root {
     /* body sizes */
@@ -72,9 +74,9 @@
     /* heading sizes */
     --heading-font-size-xxl: 45px;
     --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
+    --heading-font-size-l: 24px;
     --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
+    --heading-font-size-s: 14px;
     --heading-font-size-xs: 18px;
   }
 }
@@ -126,11 +128,23 @@ h1 {
 }
 
 h2 {
+  font-family: var(--fontFamilySerif, "Asar", Georgia, "Times New Roman", Times, serif);
   font-size: var(--heading-font-size-xl);
+  margin-bottom: 13.5px;
+    margin-top: 27px;
+}
+h2:after {
+  border-bottom: 2px solid var(--brandPrimary, #ffea00);
+  content: "";
+  display: block;
+  padding-top: 8px;
+  width: 84px;
 }
 
 h3 {
   font-size: var(--heading-font-size-l);
+  color: var(--text-color);
+  line-height: 1.5;
 }
 
 h4 {
@@ -139,6 +153,9 @@ h4 {
 
 h5 {
   font-size: var(--heading-font-size-s);
+  font-family: var(--fontFamilySansSerif, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif);
+  font-weight: var(--fontWeightBold, 600);
+  text-transform: uppercase;
 }
 
 h6 {
@@ -192,6 +209,7 @@ a:hover {
 }
 
 /* buttons */
+/* buttons */
 a.button:any-link,
 button {
   box-sizing: border-box;
@@ -199,27 +217,28 @@ button {
   max-width: 100%;
   margin: 12px 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
+  border-radius: 0;
   padding: 0.5em 1.2em;
   font-family: var(--body-font-family);
-  font-style: normal;
-  font-weight: 500;
+  font-style: var(--body-font-size-s, 14px);
+  font-weight: 600;
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background-color: var(--brandPrimary-color);
+  color: var(--background-color-black);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-transform: uppercase;
 }
 
 a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--link-hover-color);
+  background-color: var(--brandPrimary-color);
   cursor: pointer;
 }
 
