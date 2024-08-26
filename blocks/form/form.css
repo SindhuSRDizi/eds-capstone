@@ -41,7 +41,6 @@
   }
 
   .form label {
-    display: block;
     padding-bottom: var(--spacing-xxs);
     box-sizing: border-box;
     font-size: var(--type-body-s-size);
