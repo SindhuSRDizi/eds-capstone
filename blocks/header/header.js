@@ -185,8 +185,8 @@ export default async function decorate(block) {
 
   window.addEventListener('scroll', () => {
     const scrollpos = window.scrollY;
-    if (scrollpos >= headerHeight) {addScrollClass();}
-    else {removeScrollClass();}
+    if (scrollpos >= headerHeight) { addScrollClass(); }
+    else { removeScrollClass(); }
   });
 
 }

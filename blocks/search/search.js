@@ -269,7 +269,7 @@ export default async function decorate(block) {
     ? block.querySelector('a[href]').href
     : '/query-index.json';
   block.innerHTML = '';
-  block.append(searchBox(block, { source, placeholders }),searchResultsContainer(block));
+  block.append(searchBox(block, { source, placeholders }), searchResultsContainer(block));
 
   if (searchParams.get('q')) {
     const input = block.querySelector('input');
