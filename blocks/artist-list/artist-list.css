@@ -19,7 +19,7 @@
   .artist-list .artist-card-body .card-paragraph{
     color: dimgray;
     display: block;
-    font-size: var(--fontSizeSmall, 14px);
+    font-size: var(--font-size-small, 14px);
     margin-top: 5px;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -8,6 +8,7 @@ header {
   top: 0;
   z-index: 1030;
 }
+
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
@@ -19,9 +20,7 @@ header .nav-wrapper .nav-container {
   margin-top: 0;
   padding-bottom: 50px;
   padding-top: 50px;
-  -webkit-transition: padding-bottom 0s ease,padding-top 0s;
-  -webkit-transition: padding-bottom 0s ease-out,padding-top 0s ease ease-out 0s;
-  transition: padding-bottom 0s ease-out,padding-top 0s ease ease-out 0s;
+  transition: padding-bottom 0s ease-out, padding-top 0s ease ease-out 0s;
 }
 
 .scroll header .nav-wrapper .nav-container {
@@ -47,7 +46,7 @@ header .nav-wrapper .nav-top .sign-in{
 /* Styles for the nav bar */
 header .nav-wrapper .nav-top {
   padding: 10px;
-  background-color: var(--textColor,#202020) /* Optional: Background color for the top nav */
+  background-color: var(--text-color,#202020) /* Optional: Background color for the top nav */
 }
 
 
@@ -148,8 +147,8 @@ header nav p {
 }
 
 header nav a:any-link {
-  color: var(--textColor, #202020);
-  font-size: var(--fontSizeSmall, 14px);
+  color: var(--text-color, #202020);
+  font-size: var(--font-size-small, 14px);
   padding: 15px 17px;
   text-decoration: none;
   text-transform: uppercase;

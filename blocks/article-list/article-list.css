@@ -14,10 +14,12 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 7px;
 }
+
 /* Image inside the card */
 .article-list .articlelist-block .article-card-image {
     overflow: hidden;
 }
+
 .article-list .articlelist-block .article-card-image a.button:any-link {
     background: none;
     margin: 0;
@@ -48,10 +50,11 @@
     color: #666;
     line-height: 1.5;
 }
+
 .article-list .articlelist-block .article-card-body p.article-paragraph{
     color: dimgray;
     display: block;
-    font-size: var(--fontSizeSmall, 14px);
+    font-size: var(--font-size-small, 14px);
     margin-top: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -62,16 +65,16 @@
 
 /* Links */
 .article-list .articlelist-block .article-card-body a {
-    color: var(--textColor,#202020);
+    color: var(--text-color,#202020);
     text-decoration: none;
     transition: color 0.3s ease;
     text-transform: uppercase;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     background-color: transparent;
 }
 
 .article-list .articlelist-block .article-card-body a:hover {
-    color: var(--textColor,#202020);
+    color: var(--text-color,#202020);
     text-decoration: underline;
 }

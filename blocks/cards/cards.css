@@ -18,7 +18,7 @@
 .cards .cards-card-body .card-paragraph{
   color: dimgray;
   display: block;
-  font-size: var(--fontSizeSmall, 14px);
+  font-size: var(--font-size-small, 14px);
   margin-top: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -39,17 +39,17 @@
 
 .cards .cards-card-image a.button:any-link {
   background: none;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 
 .cards .cards-card-body a {
-  color: var(--textColor,#202020);
+  color: var(--text-color,#202020);
   text-decoration: none;
   transition: color 0.3s ease;
   text-transform: uppercase;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   background-color: transparent;
 }
 
