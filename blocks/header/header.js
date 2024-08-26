@@ -134,8 +134,6 @@ export default async function decorate(block) {
   navBrand.prepend(brandImage);
   brandLogoLink.href = '/us/en';
   if (brandLink) {
-    // brandLink.className = '';
-    // brandLink.closest('.button-container').className = '';
     brandLogoLink.appendChild(brandImage);
     navBrand.prepend(brandLogoLink);
   }
@@ -180,18 +178,20 @@ export default async function decorate(block) {
   block.prepend(navTop);
 
   let scrollpos = window.scrollY;
-  const header = document.querySelector("body");
-  const headerNav = document.querySelector("nav");
-  const header_height = headerNav.offsetHeight;
-  const add_class_on_scroll = () => header.classList.add("scroll");
-  const remove_class_on_scroll = () => header.classList.remove("scroll");
+  const header = document.querySelector('body');
+  const headerNav = document.querySelector('nav');
+  const headerHeight = headerNav.offsetHeight;
+  const addScrollClass = () => header.classList.add('scroll');
+  const removeScrollClass = () => header.classList.remove('scroll');
 
-  window.addEventListener('scroll', function() {
-    scrollpos = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const scrollpos = window.scrollY;
+    if (scrollpos >= headerHeight) {
+        addScrollClass();
+    } else {
+        removeScrollClass();
+    }
+});
 
-    if (scrollpos >= header_height) { add_class_on_scroll() }
-    else { remove_class_on_scroll() }
+};
 
-  })
-
-}

@@ -2,21 +2,20 @@ import {
   createOptimizedPicture,
   decorateIcons,
   fetchPlaceholders,
-} from "../../scripts/aem.js";
+} from '../../scripts/aem.js';
 
 const searchParams = new URLSearchParams(window.location.search);
 
 function findNextHeading(el) {
-  let preceedingEl =
-    el.parentElement.previousElement || el.parentElement.parentElement;
-  let h = "H2";
+  let preceedingEl = el.parentElement.previousElement || el.parentElement.parentElement;
+  let h = 'H2';
   while (preceedingEl) {
     const lastHeading = [
-      ...preceedingEl.querySelectorAll("h1, h2, h3, h4, h5, h6"),
+      ...preceedingEl.querySelectorAll('h1, h2, h3, h4, h5, h6'),
     ].pop();
     if (lastHeading) {
       const level = parseInt(lastHeading.nodeName[1], 10);
-      h = level < 6 ? `H${level + 1}` : "H6";
+      h = level < 6 ? `H${level + 1}` : 'H6';
       preceedingEl = false;
     } else {
       preceedingEl = preceedingEl.previousElement || preceedingEl.parentElement;
@@ -56,7 +55,7 @@ function highlightTextElements(terms, elements) {
       if (textBefore) {
         acc.appendChild(document.createTextNode(textBefore));
       }
-      const markedTerm = document.createElement("mark");
+      const markedTerm = document.createElement('mark');
       markedTerm.textContent = term;
       acc.appendChild(markedTerm);
       currentIndex = offset + term.length;
@@ -66,7 +65,7 @@ function highlightTextElements(terms, elements) {
     if (textAfter) {
       fragment.appendChild(document.createTextNode(textAfter));
     }
-    element.innerHTML = "";
+    element.innerHTML = '';
     element.appendChild(fragment);
   });
 }
@@ -75,14 +74,14 @@ export async function fetchData(source) {
   const response = await fetch(source);
   if (!response.ok) {
     // eslint-disable-next-line no-console
-    console.error("error loading API response", response);
+    console.error('error loading API response', response);
     return null;
   }
 
   const json = await response.json();
   if (!json) {
     // eslint-disable-next-line no-console
-    console.error("empty API response", source);
+    console.error('empty API response', source);
     return null;
   }
 
@@ -90,22 +89,22 @@ export async function fetchData(source) {
 }
 
 function renderResult(result, searchTerms, titleTag) {
-  const li = document.createElement("li");
-  const a = document.createElement("a");
+  const li = document.createElement('li');
+  const a = document.createElement('a');
   a.href = result.path;
   if (result.image) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "search-result-image";
-    const pic = createOptimizedPicture(result.image, "", false, [
-      { width: "375" },
+    const wrapper = document.createElement('div');
+    wrapper.className = 'search-result-image';
+    const pic = createOptimizedPicture(result.image, '', false, [
+      { width: '375' },
     ]);
     wrapper.append(pic);
     a.append(wrapper);
   }
   if (result.title) {
     const title = document.createElement(titleTag);
-    title.className = "search-result-title";
-    const link = document.createElement("a");
+    title.className = 'search-result-title';
+    const link = document.createElement('a');
     link.href = result.path;
     link.textContent = result.title;
     highlightTextElements(searchTerms, [link]);
@@ -113,7 +112,7 @@ function renderResult(result, searchTerms, titleTag) {
     a.append(title);
   }
   if (result.description) {
-    const description = document.createElement("p");
+    const description = document.createElement('p');
     description.textContent = result.description;
     highlightTextElements(searchTerms, [description]);
     a.append(description);
@@ -123,36 +122,35 @@ function renderResult(result, searchTerms, titleTag) {
 }
 
 function clearSearchResults(block) {
-  const searchResults = block.querySelector(".search-results");
-  searchResults.innerHTML = "";
+  const searchResults = block.querySelector('.search-results');
+  searchResults.innerHTML = '';
 }
 
 function clearSearch(block) {
   clearSearchResults(block);
   if (window.history.replaceState) {
     const url = new URL(window.location.href);
-    url.search = "";
-    searchParams.delete("q");
-    window.history.replaceState({}, "", url.toString());
+    url.search = '';
+    searchParams.delete('q');
+    window.history.replaceState({}, '', url.toString());
   }
 }
 
 async function renderResults(block, config, filteredData, searchTerms) {
   clearSearchResults(block);
-  const searchResults = block.querySelector(".search-results");
+  const searchResults = block.querySelector('.search-results');
   const headingTag = searchResults.dataset.h;
 
   if (filteredData.length) {
-    searchResults.classList.remove("no-results");
+    searchResults.classList.remove('no-results');
     filteredData.forEach((result) => {
       const li = renderResult(result, searchTerms, headingTag);
       searchResults.append(li);
     });
   } else {
-    const noResultsMessage = document.createElement("li");
-    searchResults.classList.add("no-results");
-    noResultsMessage.textContent =
-      config.placeholders.searchNoResults || "No results found.";
+    const noResultsMessage = document.createElement('li');
+    searchResults.classList.add('no-results');
+    noResultsMessage.textContent = config.placeholders.searchNoResults || 'No results found.';
     searchResults.append(noResultsMessage);
   }
 }
@@ -180,7 +178,7 @@ function filterData(searchTerms, data) {
     }
 
     const metaContents = `${result.title} ${result.description} ${result.path
-      .split("/")
+      .split('/')
       .pop()}`.toLowerCase();
     searchTerms.forEach((term) => {
       const idx = metaContents.indexOf(term);
@@ -201,7 +199,7 @@ function filterData(searchTerms, data) {
 
 async function handleSearch(e, block, config) {
   const searchValue = e.target.value;
-  searchParams.set("q", searchValue);
+  searchParams.set('q', searchValue);
   if (window.history.replaceState) {
     const url = new URL(window.location.href);
     url.search = searchParams.toString();
@@ -223,27 +221,27 @@ async function handleSearch(e, block, config) {
 }
 
 function searchResultsContainer(block) {
-  const results = document.createElement("ul");
-  results.className = "search-results";
+  const results = document.createElement('ul');
+  results.className = 'search-results';
   results.dataset.h = findNextHeading(block);
   return results;
 }
 
 function searchInput(block, config) {
-  const input = document.createElement("input");
-  input.setAttribute("type", "search");
-  input.className = "search-input";
+  const input = document.createElement('input');
+  input.setAttribute('type', 'search');
+  input.className = 'search-input';
 
-  const searchPlaceholder = config.placeholders.searchPlaceholder || "SEARCH";
+  const searchPlaceholder = config.placeholders.searchPlaceholder || 'SEARCH';
   input.placeholder = searchPlaceholder;
-  input.setAttribute("aria-label", searchPlaceholder);
+  input.setAttribute('aria-label', searchPlaceholder);
 
-  input.addEventListener("input", (e) => {
+  input.addEventListener('input', (e) => {
     handleSearch(e, block, config);
   });
 
-  input.addEventListener("keyup", (e) => {
-    if (e.code === "Escape") {
+  input.addEventListener('keyup', (e) => {
+    if (e.code === 'Escape') {
       clearSearch(block);
     }
   });
@@ -252,14 +250,14 @@ function searchInput(block, config) {
 }
 
 function searchIcon() {
-  const icon = document.createElement("span");
-  icon.classList.add("icon", "icon-search");
+  const icon = document.createElement('span');
+  icon.classList.add('icon', 'icon-search');
   return icon;
 }
 
 function searchBox(block, config) {
-  const box = document.createElement("div");
-  box.classList.add("search-box");
+  const box = document.createElement('div');
+  box.classList.add('search-box');
   box.append(searchIcon(), searchInput(block, config));
 
   return box;
@@ -267,19 +265,19 @@ function searchBox(block, config) {
 
 export default async function decorate(block) {
   const placeholders = await fetchPlaceholders();
-  const source = block.querySelector("a[href]")
-    ? block.querySelector("a[href]").href
-    : "/query-index.json";
-  block.innerHTML = "";
+  const source = block.querySelector('a[href]')
+    ? block.querySelector('a[href]').href
+    : '/query-index.json';
+  block.innerHTML = '';
   block.append(
     searchBox(block, { source, placeholders }),
     searchResultsContainer(block)
   );
 
-  if (searchParams.get("q")) {
-    const input = block.querySelector("input");
-    input.value = searchParams.get("q");
-    input.dispatchEvent(new Event("input"));
+  if (searchParams.get('q')) {
+    const input = block.querySelector('input');
+    input.value = searchParams.get('q');
+    input.dispatchEvent(new Event('input'));
   }
 
   decorateIcons(block);
