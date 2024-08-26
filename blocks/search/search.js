@@ -203,7 +203,7 @@ async function handleSearch(e, block, config) {
   if (window.history.replaceState) {
     const url = new URL(window.location.href);
     url.search = searchParams.toString();
-    window.history.replaceState({}, "", url.toString());
+    window.history.replaceState({}, '', url.toString());
   }
 
   if (searchValue.length < 3) {
@@ -269,10 +269,7 @@ export default async function decorate(block) {
     ? block.querySelector('a[href]').href
     : '/query-index.json';
   block.innerHTML = '';
-  block.append(
-    searchBox(block, { source, placeholders }),
-    searchResultsContainer(block)
-  );
+  block.append(searchBox(block, { source, placeholders }),searchResultsContainer(block));
 
   if (searchParams.get('q')) {
     const input = block.querySelector('input');

@@ -177,7 +177,6 @@ export default async function decorate(block) {
   block.append(navWrapper);
   block.prepend(navTop);
 
-  let scrollpos = window.scrollY;
   const header = document.querySelector('body');
   const headerNav = document.querySelector('nav');
   const headerHeight = headerNav.offsetHeight;
@@ -186,12 +185,8 @@ export default async function decorate(block) {
 
   window.addEventListener('scroll', () => {
     const scrollpos = window.scrollY;
-    if (scrollpos >= headerHeight) {
-        addScrollClass();
-    } else {
-        removeScrollClass();
-    }
-});
+    if (scrollpos >= headerHeight) {addScrollClass();}
+    else {removeScrollClass();}
+  });
 
-};
-
+}

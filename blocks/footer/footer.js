@@ -7,37 +7,36 @@ import { loadFragment } from "../fragment/fragment.js";
  */
 export default async function decorate(block) {
   // load footer as fragment
-  const footerMeta = getMetadata("footer");
+  const footerMeta = getMetadata('footer');
   const footerPath = footerMeta
     ? new URL(footerMeta, window.location).pathname
-    : "/footer";
+    : '/footer';
   const fragment = await loadFragment(footerPath);
 
   // decorate footer DOM
-  block.textContent = "";
-  const footer = document.createElement("div");
+  block.textContent = '';
+  const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
-  const classes = ["sections"];
+  const classes = ['sections'];
   classes.forEach((c, i) => {
     const section = footer.children[i];
     if (section) section.classList.add(`footer-nav-${c}`);
   });
 
-  const footerNav = footer.querySelector(".footer-nav-sections");
+  const footerNav = footer.querySelector('.footer-nav-sections');
   if (footerNav) {
-    const brandImage = document.createElement("img");
-    const brandLogoLink = document.createElement("a");
-    brandImage.src = "../../img/wknd-logo-light.svg";
-    brandImage.alt = "Brand Logo";
-    brandLogoLink.href = "/us/en";
+    const brandImage = document.createElement('img');
+    const brandLogoLink = document.createElement('a');
+    brandImage.src = '../../img/wknd-logo-light.svg';
+    brandImage.alt = 'Brand Logo';
+    brandLogoLink.href = '/us/en';
     footerNav.prepend(brandImage);
     brandLogoLink.appendChild(brandImage);
-    brandImage.classList.add("footer-logo-img");
-    brandLogoLink.classList.add("footer-logo-link");
+    brandImage.classList.add('footer-logo-img');
+    brandLogoLink.classList.add('footer-logo-link');
     footerNav.prepend(brandLogoLink);
     footer.prepend(footerNav);
-    console.log("window", window.innerWidth);
   }
 
   block.append(footer);
