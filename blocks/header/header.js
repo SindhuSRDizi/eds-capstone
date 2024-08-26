@@ -129,7 +129,7 @@ export default async function decorate(block) {
   const brandLink = navBrand.querySelector('.button');
   const brandImage = document.createElement('img');
   const brandLogoLink = document.createElement('a');
-  brandImage.src = '../../img/wknd-logo.svg';
+  brandImage.src = `${window.hlx.codeBasePath}/img/wknd-logo.svg`;
   brandImage.alt = 'Brand Logo';
   navBrand.prepend(brandImage);
   brandLogoLink.href = '/us/en';

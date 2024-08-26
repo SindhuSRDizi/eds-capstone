@@ -22,6 +22,7 @@
   --highlight-background-color: #ccc;
   --background-color-black: #000;
   --brand-primary-color: #ffea00;
+  --opacity-color: #00000042;
 
   /* fonts */
   --heading-font-family: asar, georgia, "Times New Roman", times, serif;
@@ -218,7 +219,7 @@ button {
   margin: 12px 0;
   border: 2px solid transparent;
   border-radius: 0;
-  padding: 0.5em 1.2em;
+  padding: 1em 1.2em;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s, 14px);
   font-weight: 600;

@@ -44,13 +44,15 @@
 }
 
 .cards .cards-card-body a {
-  color: var(--text-color,#202020);
+  margin: 0;
+  padding: 0;
+  color: var(--text-color, #202020);
   text-decoration: none;
   transition: color 0.3s ease;
   text-transform: uppercase;
-  padding: 0;
-  margin: 0;
   background-color: transparent;
+  font-size: var(--body-font-size-m);
+  font-family: var(--body-font-family, "Source Sans Pro", "Helvetica Neue", helvetica, arial, sans-serif);
 }
 
 .cards > ul > li .cards-card-image picture {
