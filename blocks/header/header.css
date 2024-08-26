@@ -156,7 +156,7 @@ header nav a:any-link {
 }
 
 header nav ul li a:hover {
-  background-color: var(--brandPrimary, #ffea00);
+  background-color: var(--brand-primary, #ffea00);
 }
 
 /* hamburger */

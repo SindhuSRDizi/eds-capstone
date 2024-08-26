@@ -49,7 +49,7 @@
   }
 
 .artist-list .artist-card-body h3 {
-  font-family: var(--fontFamilySerif, "Asar", Georgia, "Times New Roman", Times, serif);
+  font-family: var(--font-family-serif, "Asar", Georgia, "Times New Roman", Times, serif);
   font-weight: normal;
   margin-bottom: .25em;
   margin-top: 0;

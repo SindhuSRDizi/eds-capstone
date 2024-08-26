@@ -17,15 +17,15 @@
   --dark-color: #505050;
   --text-color: #202020;
   --link-color: #0045ff;
-  --link-hover-color: Invalid input color;
-  --overlay-background-color: #eeeeee;
-  --highlight-background-color: #cccccc;
-  --background-color-black: #000000;
-  --brandPrimary-color: #ffea00;
+  --link-hover-color: #0045ff;
+  --overlay-background-color: #eee;
+  --highlight-background-color: #ccc;
+  --background-color-black: #000;
+  --brand-primary-color: #ffea00;
 
   /* fonts */
-  --heading-font-family: Asar, Georgia, "Times New Roman", Times, serif;
-  --body-font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial,
+  --heading-font-family: asar, georgia, "Times New Roman", times, serif;
+  --body-font-family: "Source Sans Pro", "Helvetica Neue", helvetica, arial,
     sans-serif;
   --fixed-font-family: "Roboto Mono", menlo, consolas, "Liberation Mono",
     monospace;
@@ -128,13 +128,14 @@ h1 {
 }
 
 h2 {
-  font-family: var(--fontFamilySerif, "Asar", Georgia, "Times New Roman", Times, serif);
+  font-family: var(--font-family-serif, "Asar", Georgia, "Times New Roman", Times, serif);
   font-size: var(--heading-font-size-xl);
   margin-bottom: 13.5px;
     margin-top: 27px;
 }
-h2:after {
-  border-bottom: 2px solid var(--brandPrimary, #ffea00);
+
+h2::after {
+  border-bottom: 2px solid var(--brand-primary, #ffea00);
   content: "";
   display: block;
   padding-top: 8px;
@@ -153,8 +154,8 @@ h4 {
 
 h5 {
   font-size: var(--heading-font-size-s);
-  font-family: var(--fontFamilySansSerif, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif);
-  font-weight: var(--fontWeightBold, 600);
+  font-family: var(--font-family-sansserif, "Source Sans Pro", "Helvetica Neue", helvetica, arial, sans-serif);
+  font-weight: var(--font-weight-bold, 600);
   text-transform: uppercase;
 }
 
@@ -209,7 +210,6 @@ a:hover {
 }
 
 /* buttons */
-/* buttons */
 a.button:any-link,
 button {
   box-sizing: border-box;
@@ -220,12 +220,12 @@ button {
   border-radius: 0;
   padding: 0.5em 1.2em;
   font-family: var(--body-font-family);
-  font-style: var(--body-font-size-s, 14px);
+  font-size: var(--body-font-size-s, 14px);
   font-weight: 600;
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: var(--brandPrimary-color);
+  background-color: var(--brand-primary-color);
   color: var(--background-color-black);
   cursor: pointer;
   overflow: hidden;
@@ -238,7 +238,7 @@ a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--brandPrimary-color);
+  background-color: var(--brand-primary-color);
   cursor: pointer;
 }
 
