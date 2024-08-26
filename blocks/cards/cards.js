@@ -25,7 +25,7 @@ export default function decorate(block) {
         picture.parentNode.insertBefore(link, picture);
         link.appendChild(picture);
       }
-    }
+    },
   );
   ul.querySelectorAll('.cards-card-body').forEach((container) => {
     const paragraphs = container.querySelectorAll('p');
