@@ -12,7 +12,7 @@
   }
 
   .artist-list .artist-card-body {
-    margin: 16px 16px 16px 0;
+    /* margin: 16px 16px 16px 0; */
     text-align: center;
   }
 
@@ -58,4 +58,41 @@
 .artist-list .artist-card-body h5 {
   margin-bottom: .25em;
   margin-top: 0;
+}
+
+.artist-list .artist-card-body a {
+  margin: 0;
+  padding: 0;
+  color: var(--light-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  background-color: transparent;
+  font-family: Wkndicons, sans-serif !important;
+  width: 48px;
+  height: 48px;
+  background-color: var(--text-color);
+  display: inline-block;
+  overflow: hidden;
+}
+
+.artist-list .artist-card-body a:hover {
+  color: var(--light-color);
+  text-decoration: underline;
+}
+
+.artist-list .artist-card-body a .icon {
+  width: 48px;
+  height: 48px;
+  padding: 10px 0;
+}
+
+.artist-list .artist-card-body a .icon::before {
+  font-size: 18px;
+}
+
+.artist-list .artist-card-body a .icon-facebook-link img,
+.artist-list .artist-card-body a .icon-twitter-link img,
+.artist-list .artist-card-body a .icon-instagram-link img {
+  display: none;
 }
