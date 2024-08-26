@@ -28,6 +28,9 @@
     font-size: var(--type-body-s-size);
     line-height: var(--type-body-s-lh);
     font-family: var(--body-font-family);
+    border: solid 1px var(--text-color);
+    margin: 5px 0;
+    padding: 10px;
   }
 
   .form textarea {
@@ -45,6 +48,7 @@
     box-sizing: border-box;
     font-size: var(--type-body-s-size);
     line-height: var(--type-body-s-lh);
+    display: none;
   }
 
   .form label.required::after {

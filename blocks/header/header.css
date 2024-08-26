@@ -74,7 +74,7 @@ header .nav-wrapper .nav-top {
   padding: 20px;
   text-align: center;
   width: 300px;
-  box-shadow: 0 0 10px rgb(0 0 0 / 0.5); /* Modern notation */
+  box-shadow: 0 0 10px rgb(0 0 0 / 50%); /* Modern notation */
 }
 
 .input-field {

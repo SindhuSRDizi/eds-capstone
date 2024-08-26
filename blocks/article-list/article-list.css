@@ -72,6 +72,8 @@
     padding: 0;
     margin: 0;
     background-color: transparent;
+    font-size: var(--body-font-size-m);
+    font-family: var(--body-font-family, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif);
 }
 
 .article-list .articlelist-block .article-card-body a:hover {
