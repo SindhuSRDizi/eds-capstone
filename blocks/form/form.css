@@ -19,8 +19,6 @@
   .form input,
   .form textarea,
   .form select {
-    border: solid 1px var(--bg-color-grey);
-    padding: var(--spacing-xxs) var(--spacing-xs);
     width: 100%;
     max-width: 50rem;
     box-sizing: border-box;
