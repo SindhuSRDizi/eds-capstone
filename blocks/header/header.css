@@ -1,10 +1,104 @@
-/* header and nav layout */
+/* stylelint-disable property-no-vendor-prefix */
+
+header {
+  left: 0;
+  padding-left: 0;
+  padding-right: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1030;
+}
+
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
   z-index: 2;
   position: fixed;
 }
+
+header .nav-wrapper .nav-container {
+  margin-top: 0;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  transition: padding-bottom 0s ease-out, padding-top 0s ease ease-out 0s;
+}
+
+.scroll header .nav-wrapper .nav-container {
+  padding-bottom: 15px;
+  padding-top: 15px;
+  -webkit-box-shadow: 0 8px 20px 0 var(--opacity-color);
+  box-shadow: 0 8px 20px 0 var(--opacity-color);
+  transition: padding-bottom 0.5s ease-out,padding-top 0.5s ease ease-out 0.25s;
+}
+
+header .nav-wrapper .nav-top .sign-in{
+  margin-left: auto;
+  padding-right: 10px;
+  color: #ebebeb;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+}
+
+header .nav-top {
+  background-color: var(--background-color-black);
+  padding: 5px;
+  color: var(--light-color);
+  height: 25px;
+}
+
+/* Styles for the nav bar */
+header .nav-wrapper .nav-top {
+  padding: 10px;
+  background-color: var(--text-color,#202020) /* Optional: Background color for the top nav */
+}
+
+
+/* Overlay styles */
+.overlay {
+    display: none;
+    left: 50%;
+    position: fixed;
+    top: 34%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 450px;
+    z-index: 999999;
+}
+
+/* Overlay content styles */
+.overlay-content {
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 50%); /* Modern notation */
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.sign-in-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sign-in-button:hover {
+  background-color: #0056b3;
+}
+
 
 header nav {
   box-sizing: border-box;
@@ -30,6 +124,10 @@ header nav[aria-expanded='true'] {
   min-height: 100dvh;
 }
 
+header .nav-brand .button-container {
+  display: none;
+}
+
 @media (width >= 900px) {
   header nav {
     display: flex;
@@ -43,6 +141,10 @@ header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
   }
+
+  header .nav-brand .button-container {
+    display: none;
+  }
 }
 
 header nav p {
@@ -51,7 +153,15 @@ header nav p {
 }
 
 header nav a:any-link {
-  color: currentcolor;
+  color: var(--text-color, #202020);
+  font-size: var(--font-size-small, 14px);
+  padding: 15px 17px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+header nav ul li a:hover {
+  background-color: var(--brand-primary, #ffea00);
 }
 
 /* hamburger */
@@ -126,6 +236,22 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   top: unset;
   bottom: 3px;
   transform: rotate(-45deg);
+}
+
+header .nav-top .button-container{
+  float: right;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+header .nav-top .button-container a.button:any-link{
+  background: none;
+  margin: 2px 0;
+  padding: 0 20px;
+  line-height: 1;
+  font-size: var(--nav-font-size-s);
+  color: var(--light-color);
 }
 
 @media (width >= 900px) {
@@ -222,6 +348,7 @@ header nav .nav-sections ul > li > ul > li {
     display: flex;
     gap: 24px;
     margin: 0;
+    justify-content: flex-end;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
@@ -265,4 +392,5 @@ header nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+  height: 34px;
 }

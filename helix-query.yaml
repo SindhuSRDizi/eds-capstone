@@ -1,0 +1,19 @@
+version: 1
+indices:
+  my-site:
+    include:
+      - '/us/**'
+      target: /query-index.json
+      properties:
+        title:
+          select: head > meta[property="og:title"]
+          value: |
+            attribute(el, 'content')
+        image:
+          select: head > meta[property="og:image"]
+          value: |
+            match(attribute(el, 'content'), 'https://[^/]+(./*)')
+        template:
+          select: head > meta[name="template"]
+          value: |
+            attribute(el, 'content')

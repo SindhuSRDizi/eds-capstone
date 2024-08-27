@@ -1,6 +1,7 @@
 footer {
-  background-color: var(--light-color);
+  background-color: var(--text-color);
   font-size: var(--body-font-size-xs);
+  color: var(--light-color, #f7f7f7);
 }
 
 footer .footer > div {
@@ -10,7 +11,58 @@ footer .footer > div {
 }
 
 footer .footer p {
+  margin: 0 0 10px;
+  font-size: var(--body-font-size-s);
+}
+
+footer .footer p a {
+  font-size: var(--body-font-size-s);
+  color: var(--light-color, #ebebeb);
+  font-family: var(--body-font-family);
+  text-decoration: underline;
+}
+
+footer .footer .footer-logo-img {
+  width: 128px;
+  height: auto;
+}
+
+footer .footer .section.footer-nav-sections {
+  display: flex;
+  align-content: center;
+  margin-bottom: 35px;
+}
+
+footer .footer .section.footer-nav-sections ul {
   margin: 0;
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+footer .footer .section.footer-nav-sections ul > li {
+  margin: 10px 0;
+  font-size: var(--nav-font-size-s);
+}
+
+/* Link styling */
+footer .footer .section.footer-nav-sections ul > li > a {
+  text-decoration: none;  /* Removes the underline from links */
+  color: var(--light-color);  /* Sets the text color of the links */
+  padding: 15px 17px;
+}
+
+/* Hover effect for links */
+footer .footer .section.footer-nav-sections ul > li > a:hover {
+  color: #fff;  /* Changes text color on hover */
+  text-decoration: underline;
+
+}
+
+/* Active or selected state styling */
+footer .footer .section.footer-nav-sections ul > li > a.active {
+  background-color: #007bff;  /* Active link background color */
+  color: #fff;  /* Active link text color */
 }
 
 @media (width >= 900px) {

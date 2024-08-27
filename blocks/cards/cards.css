@@ -8,12 +8,23 @@
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
   background-color: var(--background-color);
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: 16px 16px 16px 0;
+}
+
+.cards .cards-card-body .card-paragraph{
+  color: dimgray;
+  display: block;
+  font-size: var(--font-size-small, 14px);
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+  width: 260px;
 }
 
 .cards .cards-card-image {
@@ -24,4 +35,26 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+.cards .cards-card-image a.button:any-link {
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cards .cards-card-body a {
+  margin: 0;
+  padding: 0;
+  color: var(--text-color, #202020);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  background-color: transparent;
+  font-size: var(--body-font-size-m);
+  font-family: var(--body-font-family, "Source Sans Pro", "Helvetica Neue", helvetica, arial, sans-serif);
+}
+
+.cards > ul > li .cards-card-image picture {
+  display: block;
 }

@@ -1,0 +1,97 @@
+.artist-list > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+    grid-gap: 24px;
+  }
+
+  .artist-list > ul > li {
+    background-color: transparent;
+  }
+
+  .artist-list .artist-card-body {
+    /* margin: 16px 16px 16px 0; */
+    text-align: center;
+  }
+
+  .artist-list .artist-card-body .card-paragraph{
+    color: dimgray;
+    display: block;
+    font-size: var(--font-size-small, 14px);
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: 260px;
+  }
+
+  .artist-list .artist-card-image {
+    line-height: 0;
+    text-align: center;
+  }
+
+  .artist-list > ul > li img {
+    border-radius: 50%;
+    height: 164px;
+    object-fit: cover;
+    width: 164px;
+  }
+
+  .artist-list .artist-card-image a.button:any-link, .artist-list .artist-card-body a.button:any-link {
+    background: none;
+  }
+
+  .artist-list > ul > li .artist-card-image picture {
+    display: block;
+  }
+
+.artist-list .artist-card-body h3 {
+  font-family: var(--font-family-serif, "Asar", Georgia, "Times New Roman", Times, serif);
+  font-weight: normal;
+  margin-bottom: .25em;
+  margin-top: 0;
+}
+
+.artist-list .artist-card-body h5 {
+  margin-bottom: .25em;
+  margin-top: 0;
+}
+
+.artist-list .artist-card-body a {
+  margin: 0;
+  padding: 0;
+  color: var(--light-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+  font-family: Wkndicons, sans-serif !important;
+  width: 48px;
+  height: 48px;
+  background-color: var(--text-color);
+  display: inline-block;
+  overflow: hidden;
+}
+
+.artist-list .artist-card-body a:hover {
+  color: var(--light-color);
+  text-decoration: underline;
+}
+
+.artist-list .artist-card-body a .icon {
+  width: 48px;
+  height: 48px;
+  padding: 10px 0;
+}
+
+.artist-list .artist-card-body a .icon::before {
+  font-size: 18px;
+}
+
+.artist-list .artist-card-body a .icon-facebook-link img,
+.artist-list .artist-card-body a .icon-twitter-link img,
+.artist-list .artist-card-body a .icon-instagram-link img {
+  display: none;
+}

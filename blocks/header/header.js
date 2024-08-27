@@ -119,7 +119,7 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
+  const classes = ['top', 'brand', 'sections', 'tools'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
@@ -127,9 +127,15 @@ export default async function decorate(block) {
 
   const navBrand = nav.querySelector('.nav-brand');
   const brandLink = navBrand.querySelector('.button');
+  const brandImage = document.createElement('img');
+  const brandLogoLink = document.createElement('a');
+  brandImage.src = `${window.hlx.codeBasePath}/img/wknd-logo.svg`;
+  brandImage.alt = 'Brand Logo';
+  navBrand.prepend(brandImage);
+  brandLogoLink.href = '/us/en';
   if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
+    brandLogoLink.appendChild(brandImage);
+    navBrand.prepend(brandLogoLink);
   }
 
   const navSections = nav.querySelector('.nav-sections');
@@ -160,7 +166,29 @@ export default async function decorate(block) {
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
   const navWrapper = document.createElement('div');
+  const navContainer = document.createElement('div');
+
+  const navTop = nav.querySelector('.nav-top');
   navWrapper.className = 'nav-wrapper';
-  navWrapper.append(nav);
+  navContainer.className = 'nav-container';
+
+  navContainer.append(nav);
+  navWrapper.append(navContainer);
   block.append(navWrapper);
+  block.prepend(navTop);
+
+  const header = document.querySelector('body');
+  const headerNav = document.querySelector('nav');
+  const headerHeight = headerNav.offsetHeight;
+  const addScrollClass = () => header.classList.add('scroll');
+  const removeScrollClass = () => header.classList.remove('scroll');
+
+  window.addEventListener('scroll', () => {
+    const scrollpos = window.scrollY;
+    if (scrollpos >= headerHeight) {
+      addScrollClass();
+    } else {
+      removeScrollClass();
+    }
+  });
 }
