@@ -166,7 +166,6 @@ export function addInViewAnimationToMultipleElements(animatedItems, triggerEleme
   addInviewObserverToTriggerElement(triggerElement);
 }
 
-
 /**
 * Creates a UL element with optional classes.
 * @param {Array} classes - Array of class names to add to the UL element.
@@ -211,5 +210,5 @@ export default {
   addInviewObserverToTriggerElement,
   createUlElement,
   createLiElement,
-  createDivElement
+  createDivElement,
 };
