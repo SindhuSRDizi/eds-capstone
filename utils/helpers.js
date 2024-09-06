@@ -201,6 +201,52 @@ export function createDivElement(classes = [], children = []) {
   return div;
 }
 
+/**
+ * Creates a new element with specified options
+ * @param {string} tag The type of element to create
+ * @param {Object} options Options for creating the element
+ * @returns {Element} The newly created element
+ */
+
+export function createElement(tag, options = {}) {
+  const element = document.createElement(tag);
+
+  // Apply attributes to the element
+  if (options.attributes) {
+    Object.keys(options.attributes).forEach((attr) => {
+      element.setAttribute(attr, options.attributes[attr]);
+    });
+  }
+
+  // Apply styles to the element
+  if (options.styles) {
+    Object.assign(element.style, options.styles);
+  }
+
+  // Add class names from classList array
+  if (options.classList) {
+    options.classList.forEach((className) => {
+      element.classList.add(className);
+    });
+  }
+
+  // Set text or inner HTML
+  if (options.text) {
+    element.textContent = options.text;
+  } else if (options.html) {
+    element.innerHTML = options.html;
+  }
+
+  // Append child elements
+  if (options.children) {
+    options.children.forEach((child) => {
+      element.appendChild(child);
+    });
+  }
+
+  return element;
+}
+
 export default {
   removeOuterElementLayer,
   changeTag,
@@ -211,4 +257,5 @@ export default {
   createUlElement,
   createLiElement,
   createDivElement,
+  createElement
 };

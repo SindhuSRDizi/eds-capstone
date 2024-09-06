@@ -1,54 +1,9 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { createElement } from '../../utils/helper.js'; // Assuming createElement is defined in the helper.js
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
-
-/**
- * Creates a new element with specified options
- * @param {string} tag The type of element to create
- * @param {Object} options Options for creating the element
- * @returns {Element} The newly created element
- */
-
-function createElement(tag, options = {}) {
-  const element = document.createElement(tag);
-
-  // Apply attributes to the element
-  if (options.attributes) {
-    Object.keys(options.attributes).forEach((attr) => {
-      element.setAttribute(attr, options.attributes[attr]);
-    });
-  }
-
-  // Apply styles to the element
-  if (options.styles) {
-    Object.assign(element.style, options.styles);
-  }
-
-  // Add class names from classList array
-  if (options.classList) {
-    options.classList.forEach((className) => {
-      element.classList.add(className);
-    });
-  }
-
-  // Set text or inner HTML
-  if (options.text) {
-    element.textContent = options.text;
-  } else if (options.html) {
-    element.innerHTML = options.html;
-  }
-
-  // Append child elements
-  if (options.children) {
-    options.children.forEach((child) => {
-      element.appendChild(child);
-    });
-  }
-
-  return element;
-}
 
 /**
  * Toggles all nav sections
@@ -56,11 +11,41 @@ function createElement(tag, options = {}) {
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
 function toggleAllNavSections(sections, expanded = false) {
-  sections
-    .querySelectorAll('.nav-sections .default-content-wrapper > ul > li')
-    .forEach((section) => {
-      section.setAttribute('aria-expanded', expanded);
-    });
+  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
+    section.setAttribute('aria-expanded', expanded);
+  });
+}
+
+function closeOnEscape(e) {
+  if (e.code === 'Escape') {
+    const nav = document.getElementById('nav');
+    const navSections = nav.querySelector('.nav-sections');
+    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
+    if (navSectionExpanded && isDesktop.matches) {
+      toggleAllNavSections(navSections);
+      navSectionExpanded.focus();
+    } else if (!isDesktop.matches) {
+      toggleMenu(nav, navSections);
+      nav.querySelector('button').focus();
+    }
+  }
+}
+
+function closeOnFocusLost(e) {
+  const nav = e.currentTarget;
+  if (!nav.contains(e.relatedTarget)) {
+    const navSections = nav.querySelector('.nav-sections');
+    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
+    if (navSectionExpanded && isDesktop.matches) {
+      toggleAllNavSections(navSections, false);
+    } else if (!isDesktop.matches) {
+      toggleMenu(nav, navSections, false);
+    }
+  }
+}
+
+function focusNavSection() {
+  document.activeElement.addEventListener('keydown', openOnKeydown);
 }
 
 /**
@@ -106,38 +91,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-function closeOnEscape(e) {
-  if (e.code === 'Escape') {
-    const nav = document.getElementById('nav');
-    const navSections = nav.querySelector('.nav-sections');
-    const navSectionExpanded = navSections.querySelector(
-      '[aria-expanded="true"]'
-    );
-    if (navSectionExpanded && isDesktop.matches) {
-      toggleAllNavSections(navSections);
-      navSectionExpanded.focus();
-    } else if (!isDesktop.matches) {
-      toggleMenu(nav, navSections);
-      nav.querySelector('button').focus();
-    }
-  }
-}
-
-function closeOnFocusLost(e) {
-  const nav = e.currentTarget;
-  if (!nav.contains(e.relatedTarget)) {
-    const navSections = nav.querySelector('.nav-sections');
-    const navSectionExpanded = navSections.querySelector(
-      '[aria-expanded="true"]'
-    );
-    if (navSectionExpanded && isDesktop.matches) {
-      toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
-      toggleMenu(nav, navSections, false);
-    }
-  }
-}
-
 function openOnKeydown(e) {
   const focused = document.activeElement;
   const isNavDrop = focused.className === 'nav-drop';
@@ -146,10 +99,6 @@ function openOnKeydown(e) {
     toggleAllNavSections(focused.closest('.nav-sections'));
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
   }
-}
-
-function focusNavSection() {
-  document.activeElement.addEventListener('keydown', openOnKeydown);
 }
 
 /**
@@ -195,22 +144,17 @@ export default async function decorate(block) {
   }
 
   if (navSections) {
-    navSections
-      .querySelectorAll(':scope .default-content-wrapper > ul > li')
-      .forEach((navSection) => {
-        if (navSection.querySelector('ul'))
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+        if (navSection.querySelector('ul')) {
           navSection.classList.add('nav-drop');
-        navSection.addEventListener('click', () => {
-          if (isDesktop.matches) {
-            const expanded =
-              navSection.getAttribute('aria-expanded') === 'true';
-            toggleAllNavSections(navSections);
-            navSection.setAttribute(
-              'aria-expanded',
-              expanded ? 'false' : 'true'
-            );
-          }
-        });
+          navSection.addEventListener('click', () => {
+            if (isDesktop.matches) {
+              const expanded = navSection.getAttribute('aria-expanded') === 'true';
+              toggleAllNavSections(navSections);
+              navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            }
+          });
+      }
       });
   }
 
@@ -233,9 +177,7 @@ export default async function decorate(block) {
   // Ensure elements exist before initializing the menu state
   if (nav && navSections) {
     toggleMenu(nav, navSections, isDesktop.matches);
-    isDesktop.addEventListener('change', () =>
-      toggleMenu(nav, navSections, isDesktop.matches)
-    );
+    isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
   }
 
   // Append nav elements to the block
