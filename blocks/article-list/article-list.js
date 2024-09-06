@@ -1,16 +1,16 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createUlElement, createLiElement, createDivElement } from '../../utils/helpers.js';
 
 async function createRowDiv(container, row) {
-  // Create the li element
-  const li = document.createElement('li');
+  // Create the li element using the utility function
+  const li = createLiElement();
 
   // Create the image container div
-  const imageDiv = document.createElement('div');
-  imageDiv.classList.add('article-card-image');
+  const imageDiv = createDivElement(['article-card-image']);
 
   // Create the link that wraps the image
   const imageLink = document.createElement('a');
-  imageLink.href = row.url;
+  imageLink.href = row.path;
   imageLink.title = row.title;
 
   // Create the optimized picture element
@@ -21,14 +21,12 @@ async function createRowDiv(container, row) {
   imageDiv.appendChild(imageLink);
 
   // Create the body container div
-  const bodyDiv = document.createElement('div');
-  bodyDiv.classList.add('article-card-body');
+  const bodyDiv = createDivElement(['article-card-body']);
 
   // Create the link for the title
   const titleLink = document.createElement('a');
-  titleLink.href = row.url;
+  titleLink.href = row.path;
   titleLink.title = row.title;
-  titleLink.classList.add('button');
   titleLink.textContent = row.title;
 
   // Create the paragraph for the description
@@ -36,10 +34,11 @@ async function createRowDiv(container, row) {
   description.classList.add('article-paragraph');
   description.textContent = row.description;
 
+  // Append title link and description to body div
   bodyDiv.appendChild(titleLink);
   bodyDiv.appendChild(description);
 
-  // Append the image and body divs to the li
+  // Append image and body divs to the li
   li.appendChild(imageDiv);
   li.appendChild(bodyDiv);
 
@@ -52,8 +51,11 @@ async function createDivStructure(jsonURL) {
   const resp = await fetch(url);
   const json = await resp.json();
 
-  const ul = document.createElement('ul');
+  // Create ul element using the utility function
+  const ul = createUlElement();
+
   const filteredData = json.data.filter((row) => row.template === 'Magazine');
+
   filteredData.forEach((row) => {
     createRowDiv(ul, row);
   });
@@ -62,14 +64,13 @@ async function createDivStructure(jsonURL) {
 }
 
 export default async function decorate(block) {
-  const dataLink = block.querySelector('a[href$=".json"]');
-  const parentDiv = document.createElement('div');
-  parentDiv.classList.add('articlelist-block');
+  const countriesLink = block.querySelector('a[href$=".json"]');
+  const parentDiv = createDivElement(['article-list-container']);
 
-  if (dataLink) {
-    const initialContent = await createDivStructure(dataLink.href);
+  if (countriesLink) {
+    const initialContent = await createDivStructure(countriesLink.href);
 
     parentDiv.append(initialContent);
-    dataLink.replaceWith(parentDiv);
+    countriesLink.replaceWith(parentDiv);
   }
 }
