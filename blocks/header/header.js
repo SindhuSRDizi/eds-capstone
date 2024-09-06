@@ -70,23 +70,14 @@ function toggleAllNavSections(sections, expanded = false) {
  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
 function toggleMenu(nav, navSections, forceExpanded = null) {
-  const expanded =
-    forceExpanded !== null
-      ? !forceExpanded
-      : nav.getAttribute('aria-expanded') === 'true';
+  const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = expanded || isDesktop.matches ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
 
-  toggleAllNavSections(
-    navSections,
-    expanded || isDesktop.matches ? 'false' : 'true'
-  );
+  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
 
-  button.setAttribute(
-    'aria-label',
-    expanded ? 'Open navigation' : 'Close navigation'
-  );
+  button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
 
   // Handle nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
@@ -199,8 +190,6 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (brandLink) {
-    // brandLink.className = '';
-    // brandLink.closest('.button-container').className = '';
     brandLogoLink.appendChild(brandImage);
     navBrand.prepend(brandLogoLink);
   }
