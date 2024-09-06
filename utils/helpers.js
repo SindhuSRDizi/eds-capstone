@@ -257,5 +257,5 @@ export default {
   createUlElement,
   createLiElement,
   createDivElement,
-  createElement
+  createElement,
 };
