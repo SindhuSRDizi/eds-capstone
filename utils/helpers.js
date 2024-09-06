@@ -166,6 +166,42 @@ export function addInViewAnimationToMultipleElements(animatedItems, triggerEleme
   addInviewObserverToTriggerElement(triggerElement);
 }
 
+
+/**
+* Creates a UL element with optional classes.
+* @param {Array} classes - Array of class names to add to the UL element.
+* @returns {HTMLElement} The created UL element.
+*/
+export function createUlElement(classes = []) {
+  const ul = document.createElement('ul');
+  classes.forEach((cls) => ul.classList.add(cls));
+  return ul;
+}
+
+/**
+* Creates an LI element with optional classes.
+* @param {Array} classes - Array of class names to add to the LI element.
+* @returns {HTMLElement} The created LI element.
+*/
+export function createLiElement(classes = []) {
+  const li = document.createElement('li');
+  classes.forEach((cls) => li.classList.add(cls));
+  return li;
+}
+
+/**
+* Creates a div element with optional classes and appends children.
+* @param {Array} classes - Array of class names to add to the div.
+* @param {HTMLElement[]} children - Array of children to append to the div.
+* @returns {HTMLElement} The created div element.
+*/
+export function createDivElement(classes = [], children = []) {
+  const div = document.createElement('div');
+  classes.forEach((cls) => div.classList.add(cls));
+  children.forEach((child) => div.appendChild(child));
+  return div;
+}
+
 export default {
   removeOuterElementLayer,
   changeTag,
@@ -173,4 +209,7 @@ export default {
   addInViewAnimationToSingleElement,
   addInViewAnimationToMultipleElements,
   addInviewObserverToTriggerElement,
+  createUlElement,
+  createLiElement,
+  createDivElement
 };

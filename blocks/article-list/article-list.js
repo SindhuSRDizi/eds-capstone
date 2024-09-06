@@ -1,17 +1,15 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { createUlElement, createLiElement, createDivElement, createElement } from '../../utils/helper.js'; // Assuming createElement is defined in the helper.js
 
 async function createRowDiv(container, row) {
-  // Create the li element
-  const li = document.createElement('li');
+  // Create the li element using the utility function
+  const li = createLiElement();
 
-  // Create the image container div
-  const imageDiv = document.createElement('div');
-  imageDiv.classList.add('article-card-image');
+  // Create the image container div using the createElement utility
+  const imageDiv = createElement('div', { classList: ['article-card-image'] });
 
   // Create the link that wraps the image
-  const imageLink = document.createElement('a');
-  imageLink.href = row.url;
-  imageLink.title = row.title;
+  const imageLink = createElement('a', { attributes: { href: row.path, title: row.title } });
 
   // Create the optimized picture element
   const optimizedPicture = createOptimizedPicture(row.image, row.title, false, [{ width: '750' }]);
@@ -20,26 +18,20 @@ async function createRowDiv(container, row) {
   imageLink.appendChild(optimizedPicture);
   imageDiv.appendChild(imageLink);
 
-  // Create the body container div
-  const bodyDiv = document.createElement('div');
-  bodyDiv.classList.add('article-card-body');
+  // Create the body container div using the createElement utility
+  const bodyDiv = createElement('div', { classList: ['article-card-body'] });
 
   // Create the link for the title
-  const titleLink = document.createElement('a');
-  titleLink.href = row.url;
-  titleLink.title = row.title;
-  titleLink.classList.add('button');
-  titleLink.textContent = row.title;
+  const titleLink = createElement('a', { attributes: { href: row.path, title: row.title }, text: row.title });
 
-  // Create the paragraph for the description
-  const description = document.createElement('p');
-  description.classList.add('article-paragraph');
-  description.textContent = row.description;
+  // Create the paragraph for the description using the createElement utility
+  const description = createElement('p', { classList: ['article-paragraph'], text: row.description });
 
+  // Append title link and description to body div
   bodyDiv.appendChild(titleLink);
   bodyDiv.appendChild(description);
 
-  // Append the image and body divs to the li
+  // Append image and body divs to the li
   li.appendChild(imageDiv);
   li.appendChild(bodyDiv);
 
@@ -52,8 +44,11 @@ async function createDivStructure(jsonURL) {
   const resp = await fetch(url);
   const json = await resp.json();
 
-  const ul = document.createElement('ul');
+  // Create ul element using the utility function
+  const ul = createUlElement();
+
   const filteredData = json.data.filter((row) => row.template === 'Magazine');
+
   filteredData.forEach((row) => {
     createRowDiv(ul, row);
   });
@@ -62,14 +57,51 @@ async function createDivStructure(jsonURL) {
 }
 
 export default async function decorate(block) {
-  const dataLink = block.querySelector('a[href$=".json"]');
-  const parentDiv = document.createElement('div');
-  parentDiv.classList.add('articlelist-block');
+  const countriesLink = block.querySelector('a[href$=".json"]');
+  const parentDiv = createElement('div', { classList: ['article-list-container'] });
 
-  if (dataLink) {
-    const initialContent = await createDivStructure(dataLink.href);
+  if (countriesLink) {
+    const initialContent = await createDivStructure(countriesLink.href);
 
     parentDiv.append(initialContent);
-    dataLink.replaceWith(parentDiv);
+    countriesLink.replaceWith(parentDiv);
   }
+}
+
+/**
+ * Creates a new element with specified options
+ * @param {string} tag The type of element to create
+ * @param {Object} options Options for creating the element
+ * @returns {Element} The newly created element
+ */
+export function createElement(tag, options = {}) {
+  const element = document.createElement(tag);
+
+  if (options.attributes) {
+    Object.keys(options.attributes).forEach((attr) => {
+      element.setAttribute(attr, options.attributes[attr]);
+    });
+  }
+
+  if (options.classList) {
+    element.classList.add(...options.classList);
+  }
+
+  if (options.styles) {
+    Object.assign(element.style, options.styles);
+  }
+
+  if (options.text) {
+    element.textContent = options.text;
+  } else if (options.html) {
+    element.innerHTML = options.html;
+  }
+
+  if (options.children) {
+    options.children.forEach((child) => {
+      element.appendChild(child);
+    });
+  }
+
+  return element;
 }
