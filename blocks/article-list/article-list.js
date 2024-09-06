@@ -1,5 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { createUlElement, createLiElement, createDivElement, createElement } from '../../utils/helper.js'; // Assuming createElement is defined in the helper.js
+import { createUlElement, createLiElement, createDivElement, createElement } from '../../utils/helpers.js'; // Assuming createElement is defined in the helper.js
 
 async function createRowDiv(container, row) {
   // Create the li element using the utility function
