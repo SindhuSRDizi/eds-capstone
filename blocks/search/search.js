@@ -10,9 +10,7 @@ function findNextHeading(el) {
   let preceedingEl = el.parentElement.previousElement || el.parentElement.parentElement;
   let h = 'H2';
   while (preceedingEl) {
-    const lastHeading = [
-      ...preceedingEl.querySelectorAll('h1, h2, h3, h4, h5, h6'),
-    ].pop();
+    const lastHeading = [...preceedingEl.querySelectorAll('h1, h2, h3, h4, h5, h6')].pop();
     if (lastHeading) {
       const level = parseInt(lastHeading.nodeName[1], 10);
       h = level < 6 ? `H${level + 1}` : 'H6';
@@ -34,10 +32,7 @@ function highlightTextElements(terms, elements) {
       let start = 0;
       let offset = textContent.toLowerCase().indexOf(term.toLowerCase(), start);
       while (offset >= 0) {
-        matches.push({
-          offset,
-          term: textContent.substring(offset, offset + term.length),
-        });
+        matches.push({ offset, term: textContent.substring(offset, offset + term.length) });
         start = offset + term.length;
         offset = textContent.toLowerCase().indexOf(term.toLowerCase(), start);
       }
@@ -95,9 +90,7 @@ function renderResult(result, searchTerms, titleTag) {
   if (result.image) {
     const wrapper = document.createElement('div');
     wrapper.className = 'search-result-image';
-    const pic = createOptimizedPicture(result.image, '', false, [
-      { width: '375' },
-    ]);
+    const pic = createOptimizedPicture(result.image, '', false, [{ width: '375' }]);
     wrapper.append(pic);
     a.append(wrapper);
   }
@@ -167,9 +160,10 @@ function filterData(searchTerms, data) {
     let minIdx = -1;
 
     searchTerms.forEach((term) => {
-      const idx = (result.header || result.title).toLowerCase().indexOf(term);
+      const text = (result.header || result.title || '').toLowerCase();
+      const idx = text.indexOf(term.toLowerCase());
       if (idx < 0) return;
-      if (minIdx < idx) minIdx = idx;
+      if (minIdx < 0 || idx < minIdx) minIdx = idx;
     });
 
     if (minIdx >= 0) {
@@ -177,9 +171,8 @@ function filterData(searchTerms, data) {
       return;
     }
 
-    const metaContents = `${result.title} ${result.description} ${result.path
-      .split('/')
-      .pop()}`.toLowerCase();
+    const pathFragment = typeof result.path === 'string' ? result.path.split('/').pop() : '';
+    const metaContents = `${(result.title || '')} ${(result.description || '')} ${pathFragment}`.toLowerCase();
     searchTerms.forEach((term) => {
       const idx = metaContents.indexOf(term);
       if (idx < 0) return;
@@ -198,8 +191,16 @@ function filterData(searchTerms, data) {
 }
 
 async function handleSearch(e, block, config) {
-  const searchValue = e.target.value;
+  const searchValue = e.target.value.trim();
   searchParams.set('q', searchValue);
+
+  if (searchValue.length >= 3) {
+    const url = new URL('/search', window.location.origin);
+    url.searchParams.set('q', searchValue);
+    window.location.href = url.toString();
+    return;
+  }
+
   if (window.history.replaceState) {
     const url = new URL(window.location.href);
     url.search = searchParams.toString();
@@ -210,10 +211,7 @@ async function handleSearch(e, block, config) {
     clearSearch(block);
     return;
   }
-  const searchTerms = searchValue
-    .toLowerCase()
-    .split(/\s+/)
-    .filter((term) => !!term);
+  const searchTerms = searchValue.toLowerCase().split(/\s+/).filter((term) => !!term);
 
   const data = await fetchData(config.source);
   const filteredData = filterData(searchTerms, data);
@@ -240,11 +238,7 @@ function searchInput(block, config) {
     handleSearch(e, block, config);
   });
 
-  input.addEventListener('keyup', (e) => {
-    if (e.code === 'Escape') {
-      clearSearch(block);
-    }
-  });
+  input.addEventListener('keyup', (e) => { if (e.code === 'Escape') { clearSearch(block); } });
 
   return input;
 }
@@ -258,18 +252,22 @@ function searchIcon() {
 function searchBox(block, config) {
   const box = document.createElement('div');
   box.classList.add('search-box');
-  box.append(searchIcon(), searchInput(block, config));
+  box.append(
+    searchIcon(),
+    searchInput(block, config),
+  );
 
   return box;
 }
 
 export default async function decorate(block) {
   const placeholders = await fetchPlaceholders();
-  const source = block.querySelector('a[href]')
-    ? block.querySelector('a[href]').href
-    : '/query-index.json';
+  const source = block.querySelector('a[href]') ? block.querySelector('a[href]').href : '/query-index.json';
   block.innerHTML = '';
-  block.append(searchBox(block, { source, placeholders }), searchResultsContainer(block));
+  block.append(
+    searchBox(block, { source, placeholders }),
+    searchResultsContainer(block),
+  );
 
   if (searchParams.get('q')) {
     const input = block.querySelector('input');

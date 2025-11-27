@@ -166,6 +166,87 @@ export function addInViewAnimationToMultipleElements(animatedItems, triggerEleme
   addInviewObserverToTriggerElement(triggerElement);
 }
 
+/**
+* Creates a UL element with optional classes.
+* @param {Array} classes - Array of class names to add to the UL element.
+* @returns {HTMLElement} The created UL element.
+*/
+export function createUlElement(classes = []) {
+  const ul = document.createElement('ul');
+  classes.forEach((cls) => ul.classList.add(cls));
+  return ul;
+}
+
+/**
+* Creates an LI element with optional classes.
+* @param {Array} classes - Array of class names to add to the LI element.
+* @returns {HTMLElement} The created LI element.
+*/
+export function createLiElement(classes = []) {
+  const li = document.createElement('li');
+  classes.forEach((cls) => li.classList.add(cls));
+  return li;
+}
+
+/**
+* Creates a div element with optional classes and appends children.
+* @param {Array} classes - Array of class names to add to the div.
+* @param {HTMLElement[]} children - Array of children to append to the div.
+* @returns {HTMLElement} The created div element.
+*/
+export function createDivElement(classes = [], children = []) {
+  const div = document.createElement('div');
+  classes.forEach((cls) => div.classList.add(cls));
+  children.forEach((child) => div.appendChild(child));
+  return div;
+}
+
+/**
+ * Creates a new element with specified options
+ * @param {string} tag The type of element to create
+ * @param {Object} options Options for creating the element
+ * @returns {Element} The newly created element
+ */
+
+export function createElement(tag, options = {}) {
+  const element = document.createElement(tag);
+
+  // Apply attributes to the element
+  if (options.attributes) {
+    Object.keys(options.attributes).forEach((attr) => {
+      element.setAttribute(attr, options.attributes[attr]);
+    });
+  }
+
+  // Apply styles to the element
+  if (options.styles) {
+    Object.assign(element.style, options.styles);
+  }
+
+  // Add class names from classList array
+  if (options.classList) {
+    options.classList.forEach((className) => {
+      element.classList.add(className);
+    });
+  }
+
+  // Set text or inner HTML
+  if (options.text) {
+    element.textContent = options.text;
+  } else if (options.html) {
+    element.innerHTML = options.html;
+  }
+
+  // Append child elements
+  if (options.children) {
+    options.children.forEach((child) => {
+      element.appendChild(child);
+    });
+  }
+
+  return element;
+}
+
 export default {
   removeOuterElementLayer,
   changeTag,
@@ -173,4 +254,8 @@ export default {
   addInViewAnimationToSingleElement,
   addInViewAnimationToMultipleElements,
   addInviewObserverToTriggerElement,
+  createUlElement,
+  createLiElement,
+  createDivElement,
+  createElement,
 };
